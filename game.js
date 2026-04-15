@@ -157,6 +157,111 @@ const PLAYER_COLORS = ["p1", "p2", "p3"];
 const PLAYER_NAMES = ["Blue", "Green", "Red"];
 const SEQ_TO_WIN = { 2: 2, 3: 1 };
 
+// --- Translations ---
+let rulesLang = "en";
+
+const RULES = {
+  en: {
+    title: "How to Play",
+    sections: [
+      {
+        heading: "Objective",
+        body: '<p>Be the first player to complete the required number of <strong>sequences</strong> (5 chips in a row).</p><ul><li>2-player game: complete <strong>2 sequences</strong> to win</li><li>3-player game: complete <strong>1 sequence</strong> to win</li></ul>'
+      },
+      {
+        heading: "Turns",
+        body: '<p>Players take turns placing chips on the board. Click <strong>Next Turn</strong> to pass the turn to the next player.</p>'
+      },
+      {
+        heading: "Placing Chips",
+        body: '<p>With <strong>Place</strong> mode active, click any empty cell to put your chip there. You cannot place on a cell that already has a chip or on a FREE space.</p>'
+      },
+      {
+        heading: "Removing Chips",
+        body: '<p>Switch to <strong>Remove</strong> mode to remove an opponent\'s chip from the board. You cannot remove chips that are part of a completed sequence or chips on FREE spaces. Removing does not end your turn.</p>'
+      },
+      {
+        heading: "The Board & Cards",
+        body: '<p>The 10x10 board is made up of cells, each representing a card from a standard 52-card deck plus 4 Jacks (2 one-eyed, 2 two-eyed). Each regular card appears exactly twice on the board (e.g. there are two 10 of Spades cells). The four corner cells are <strong>FREE</strong> spaces — they belong to everyone and count toward any sequence.</p>'
+      },
+      {
+        heading: "The Dealer & Dealing",
+        body: '<p>The dealer shuffles the deck and deals a hand of cards to each player. The number of cards dealt depends on the number of players:</p><ul><li><strong>2 players</strong> — 7 cards each</li><li><strong>3–4 players</strong> — 6 cards each</li><li><strong>6 players</strong> — 5 cards each</li><li><strong>8–9 players</strong> — 4 cards each</li><li><strong>10–12 players</strong> — 3 cards each</li></ul><p>On your turn, you play a card from your hand to place a chip on the matching board cell, then draw a replacement card from the deck. If the deck runs out, the discard pile is reshuffled to form a new draw pile.</p>'
+      },
+      {
+        heading: "Jack Cards",
+        body: '<p>Jacks are special cards that are not on the board:</p><ul><li><strong>One-Eyed Jack</strong> (Jack of Spades ♠, Jack of Clubs ♣) — Remove one opponent\'s chip from the board. You cannot remove a chip that is part of a completed sequence.</li><li><strong>Two-Eyed Jack</strong> (Jack of Hearts ♥, Jack of Diamonds ♦) — Wild card. Place a chip on <strong>any</strong> open space on the board, even if that card is not in your hand.</li></ul>'
+      },
+      {
+        heading: "Penalty — Coaching",
+        body: '<p>If a player gives a move hint or coaches another team (e.g. suggesting where to place or remove a chip), that player is penalized. Their hand is <strong>reduced by 1 card</strong> for the remainder of the game. Multiple offenses result in further card reductions.</p>'
+      },
+      {
+        heading: "Digital Version Note",
+        body: '<p>In this digital version, the card-hand and dealer mechanics are not enforced by the code. Players may place a chip on <strong>any</strong> open cell and use <strong>Place/Remove</strong> modes freely. To play with proper rules, designate a dealer, deal cards, and honor the hand system manually — play only on cells that match a card in your hand.</p>'
+      },
+      {
+        heading: "Sequences",
+        body: '<p>A sequence is <strong>5 or more chips in a row</strong> — horizontally, vertically, or diagonally. Corner <strong>FREE</strong> spaces count as part of a sequence for every player. Once a sequence is completed, those chips are locked and cannot be removed.</p>'
+      }
+    ]
+  },
+  id: {
+    title: "Cara Bermain",
+    sections: [
+      {
+        heading: "Tujuan",
+        body: '<p>Jadilah pemain pertama yang menyelesaikan jumlah <strong>sequence</strong> yang ditentukan (5 chip berjajar).</p><ul><li>Permainan 2 pemain: selesaikan <strong>2 sequence</strong> untuk menang</li><li>Permainan 3 pemain: selesaikan <strong>1 sequence</strong> untuk menang</li></ul>'
+      },
+      {
+        heading: "Giliran",
+        body: '<p>Pemain menggilir menaruh chip di papan. Klik <strong>Next Turn</strong> untuk mengoper giliran ke pemain berikutnya.</p>'
+      },
+      {
+        heading: "Menaruh Chip",
+        body: '<p>Dengan mode <strong>Place</strong> aktif, klik sel kosong mana saja untuk menaruh chip Anda. Anda tidak bisa menaruh di sel yang sudah ada chip atau di ruang FREE.</p>'
+      },
+      {
+        heading: "Menghapus Chip",
+        body: '<p>Alihkan ke mode <strong>Remove</strong> untuk menghapus chip lawan dari papan. Anda tidak bisa menghapus chip yang bagian dari sequence yang sudah selesai atau chip di ruang FREE. Menghapus tidak mengakhiri giliran Anda.</p>'
+      },
+      {
+        heading: "Papan & Kartu",
+        body: '<p>Papan 10x10 terdiri dari sel-sel, yang masing-masing merepresentasikan kartu dari dek standar 52 kartu ditambah 4 Jack (2 one-eyed, 2 two-eyed). Setiap kartu biasa muncul tepat dua kali di papan (misalnya ada dua sel 10 of Spades). Empat sel pojok adalah ruang <strong>FREE</strong> — milik semua pemain dan berlaku untuk setiap sequence.</p>'
+      },
+      {
+        heading: "Dealer & Pembagian",
+        body: '<p>Dealer mengocok dek dan membagikan tangan kartu ke setiap pemain. Jumlah kartu yang dibagikan tergantung jumlah pemain:</p><ul><li><strong>2 pemain</strong> — 7 kartu per pemain</li><li><strong>3–4 pemain</strong> — 6 kartu per pemain</li><li><strong>6 pemain</strong> — 5 kartu per pemain</li><li><strong>8–9 pemain</strong> — 4 kartu per pemain</li><li><strong>10–12 pemain</strong> — 3 kartu per pemain</li></ul><p>Saat giliran Anda, mainkan kartu dari tangan Anda untuk menaruh chip di sel papan yang sesuai, lalu ambil kartu pengganti dari dek. Jika dek habis, tumpukan buangan dikocok ulang menjadi dek baru.</p>'
+      },
+      {
+        heading: "Kartu Jack",
+        body: '<p>Jack adalah kartu khusus yang tidak ada di papan:</p><ul><li><strong>One-Eyed Jack</strong> (Jack of Spades ♠, Jack of Clubs ♣) — Hapus satu chip lawan dari papan. Anda tidak bisa menghapus chip yang bagian dari sequence yang sudah selesai.</li><li><strong>Two-Eyed Jack</strong> (Jack of Hearts ♥, Jack of Diamonds ♦) — Kartu wild. Taruh chip di <strong>sel mana saja</strong> yang kosong di papan, meskipun kartu tersebut tidak ada di tangan Anda.</li></ul>'
+      },
+      {
+        heading: "Hukuman — Melatih",
+        body: '<p>Jika seorang pemain memberikan petunjuk gerakan atau melatih tim lain (misalnya menyarankan di mana menaruh atau menghapus chip), pemain tersebut dikenakan hukuman. Tangan mereka <strong>dikurangi 1 kartu</strong> selama sisa permainan. Pelanggaran berulang mengakibatkan pengurangan kartu lebih lanjut.</p>'
+      },
+      {
+        heading: "Catatan Versi Digital",
+        body: '<p>Dalam versi digital ini, mekanik tangan kartu dan dealer tidak diterapkan oleh kode. Pemain boleh menaruh chip di <strong>sel mana saja</strong> yang kosong dan menggunakan mode <strong>Place/Remove</strong> dengan bebas. Untuk bermain dengan aturan lengkap, tunjuk dealer, bagikan kartu, dan patuhi sistem tangan secara manual — mainkan hanya di sel yang sesuai dengan kartu di tangan Anda.</p>'
+      },
+      {
+        heading: "Sequence",
+        body: '<p>Sequence adalah <strong>5 chip atau lebih berjajar</strong> — horizontal, vertikal, atau diagonal. Ruang <strong>FREE</strong> di pojok berlaku sebagai bagian dari sequence untuk semua pemain. Setelah sequence selesai, chip-chip tersebut terkunci dan tidak bisa dihapus.</p>'
+      }
+    ]
+  }
+};
+
+function renderRules() {
+  const lang = RULES[rulesLang];
+  document.getElementById("rules-title").textContent = lang.title;
+  const body = document.getElementById("rules-body");
+  body.innerHTML = lang.sections.map(s =>
+    `<h3>${s.heading}</h3>${s.body}`
+  ).join("");
+}
+
 function initBoard() {
   state.board = BOARD_LAYOUT.map(row =>
     row.map(card => ({ card, chip: null }))
@@ -380,6 +485,26 @@ function init() {
 
   document.getElementById("btn-2p").addEventListener("click", () => setPlayerCount(2));
   document.getElementById("btn-3p").addEventListener("click", () => setPlayerCount(3));
+
+  // Rules modal
+  const modal = document.getElementById("rules-modal");
+  const langBtn = document.getElementById("btn-lang");
+
+  renderRules();
+  langBtn.classList.add("active");
+
+  document.getElementById("btn-rules").addEventListener("click", () => {
+    renderRules();
+    modal.classList.add("open");
+  });
+  document.getElementById("btn-close-rules").addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+
+  langBtn.addEventListener("click", () => {
+    rulesLang = rulesLang === "en" ? "id" : "en";
+    langBtn.textContent = rulesLang === "en" ? "ID" : "EN";
+    renderRules();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", init);
