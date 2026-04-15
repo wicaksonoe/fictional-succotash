@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#app {
+  max-width: 660px;
+  width: 100%;
+}
+
+#toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: #16213e;
+  border-radius: 8px;
+}
+
+#toolbar h1 {
+  font-size: 1.2rem;
+  margin-right: auto;
+  letter-spacing: 1px;
+}
+
+#player-select,
+#mode-select {
+  display: flex;
+  gap: 4px;
+}
+
+.player-count,
+.mode-btn,
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.player-count {
+  background: #2a3a5e;
+  color: #aaa;
+}
+
+.player-count.active {
+  background: #4a6fa5;
+  color: #fff;
+}
+
+.mode-btn {
+  background: #2a3a5e;
+  color: #aaa;
+}
+
+.mode-btn.active {
+  background: #3a8a3a;
+  color: #fff;
+}
+
+.mode-btn.active.remove-mode {
+  background: #a83a3a;
+}
+
+.action-btn {
+  background: #3a5a8a;
+  color: #fff;
+}
+
+.action-btn.danger {
+  background: #8a3a3a;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+#players {
+  display: flex;
+  gap: 8px;
+  flex: 1 0 100%;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #1a1a2e;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.player-info.current {
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.chip-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.chip-indicator.p1 {
+  background: #4a9eff;
+}
+
+.chip-indicator.p2 {
+  background: #4ac97a;
+}
+
+.chip-indicator.p3 {
+  background: #ff4a6a;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  background: #0a0a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #16213e;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cell:active {
+  background: #1e2d4e;
+}
+
+.cell .card-label {
+  font-size: 0.65rem;
+  line-height: 1.1;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cell .card-label .rank {
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.cell .card-label .suit {
+  font-size: 1.7rem;
+  display: block;
+}
+
+.cell .card-label.red {
+  color: #e74c3c;
+}
+
+.cell .card-label.black {
+  color: #d0d0d0;
+}
+
+.cell.free .card-label {
+  color: #ffd700;
+  font-size: 3rem;
+}
+
+.cell.has-chip .card-label {
+  opacity: 0.3;
+}
+
+.chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.chip.p1 {
+  background: radial-gradient(circle at 35% 35%, #7ab8ff, #4a9eff, #2a6ecc);
+}
+
+.chip.p2 {
+  background: radial-gradient(circle at 35% 35%, #7aeb9a, #4ac97a, #2a9950);
+}
+
+.chip.p3 {
+  background: radial-gradient(circle at 35% 35%, #ff7a8a, #ff4a6a, #cc2a4a);
+}
+
+.cell.sequence.p1 {
+  box-shadow: inset 0 0 8px rgba(74, 158, 255, 0.7);
+}
+
+.cell.sequence.p2 {
+  box-shadow: inset 0 0 8px rgba(74, 201, 122, 0.7);
+}
+
+.cell.sequence.p3 {
+  box-shadow: inset 0 0 8px rgba(255, 74, 106, 0.7);
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 500px) {
+  .cell .card-label .rank {
+    font-size: 0.6rem;
+  }
+
+  .cell .card-label .suit {
+    font-size: 0.55rem;
+  }
+
+  .player-count,
+  .mode-btn,
+  .action-btn {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+
+  #toolbar h1 {
+    font-size: 1rem;
+  }
+}
